@@ -18,27 +18,12 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#include <cutils/properties.h>
-#include <string.h>
-
-inline const char* BtmGetDefaultName()
-{
-	char product_name[PROPERTY_VALUE_MAX];
-	property_get("ro.product.name", product_name, "");
-
-	if (strstr(product_name, "h1"))
-		return "LG G5";
-	if (strstr(product_name, "elsa"))
-		return "LG V20";
-	if (strstr(product_name, "lucye"))
-		return "LG G6";
-
-	return "";
-}
-
-#define BTM_DEF_LOCAL_NAME BtmGetDefaultName()
-#define BTA_DISABLE_DELAY 1000 /* in milliseconds */
-
-#define BLE_VND_INCLUDED  TRUE
-
+#define BTM_DEF_LOCAL_NAME "LG V30"
+#define BLUETOOTH_QTI_SW TRUE
+// Disables read remote device feature
+#define MAX_ACL_CONNECTIONS   16
+#define MAX_L2CAP_CHANNELS    16
+#define BLE_VND_INCLUDED   TRUE
+// skips conn update at conn completion
+#define BT_CLEAN_TURN_ON_DISABLED 1
 #endif
