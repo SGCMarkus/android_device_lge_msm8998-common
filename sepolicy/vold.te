@@ -1,5 +1,2 @@
-allow vold sensors_data_file:dir { mounton };
-allow vold persist_drm_file:dir { mounton };
-
-allow vold firmware_file:dir { search };
-allow vold firmware_file:file { read open getattr };
+allow vold proc_touchpanel:dir r_dir_perms;
+allow vold system_block_device:blk_file getattr;

@@ -128,6 +128,9 @@ AUDIO_FEATURE_ENABLED_SPKR_PROTECTION := true
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_USES_ALSA_AUDIO := true
+
+AUDIO_FEATURE_ENABLED_FM_POWER_OPT := true
+
 USE_CUSTOM_AUDIO_POLICY := 1
 USE_XML_AUDIO_POLICY_CONF := 1
 
@@ -186,7 +189,7 @@ TARGET_USES_HWC2 := true
 TARGET_HW_DISK_ENCRYPTION := true
 
 # GPS
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8996
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8998
 BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
@@ -216,7 +219,7 @@ TARGET_NEEDS_PDFIUM_BIGINT := true
 
 # Power
 TARGET_PROVIDES_POWERHAL := true
-BOARD_HAL_STATIC_LIBRARIES := libdumpstate.msm8996
+BOARD_HAL_STATIC_LIBRARIES := libdumpstate.msm8998
 
 # Properties
 TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
@@ -254,4 +257,4 @@ WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcmdhd.bin"
 
 # inherit from the proprietary version
--include vendor/lge/msm8996-common/BoardConfigVendor.mk
+-include vendor/lge/msm8998-common/BoardConfigVendor.mk
