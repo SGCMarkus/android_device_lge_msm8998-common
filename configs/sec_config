@@ -1,3 +1,4 @@
+/* This configuration file (SEC) is automatically generated from shell script.*/
 /* IPC Security Config */
 /* <GPS QMI Service ID - 16>:<GPS QMI Instance ID - all instances>:<Client Group ID> */
 16:4294967295:1000:1021:1026
@@ -320,3 +321,5 @@
 69:4294967295:1000
 /* <WLPS QMI Service ID - 0x39>:<WLFW QMI Instance ID - all instances>:<Client Group ID> */
 57:4294967295:1000
+/* Allow VSS GNSS service to be used by system and net_raw processes */
+704:4294967295:1000:3004
