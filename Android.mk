@@ -54,39 +54,39 @@ ALL_DEFAULT_INSTALLED_MODULES += $(DXHDCP2_SYMLINKS)
 # END DXHDCP2 Images
 
 # HASHSTORE Images
-HASHSTORE_IMAGES := \
-    hashstor.b00 hashstor.b01 hashstor.b02 hashstor.b03 hashstor.b04 \
-    hashstor.b05 hashstor.b06 hashstor.mdt
+#HASHSTORE_IMAGES := \
+#    hashstor.b00 hashstor.b01 hashstor.b02 hashstor.b03 hashstor.b04 \
+#    hashstor.b05 hashstor.b06 hashstor.mdt
 
-HASHSTORE_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(HASHSTORE_IMAGES)))
-$(HASHSTORE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "HASHSTORE firmware link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+#HASHSTORE_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(HASHSTORE_IMAGES)))
+#$(HASHSTORE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+#	@echo "HASHSTORE firmware link: $@"
+#	@mkdir -p $(dir $@)
+#	@rm -rf $@
+#	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
-ALL_DEFAULT_INSTALLED_MODULES += $(HASHSTORE_SYMLINKS)
+#ALL_DEFAULT_INSTALLED_MODULES += $(HASHSTORE_SYMLINKS)
 # END HASHSTORE Images
 
 # SECUREKS Images
-SECUREKS_IMAGES := \
-    secureks.b00 secureks.b01 secureks.b02 secureks.b03 secureks.b04 \
-    secureks.b05 secureks.b06 secureks.mdt
+#SECUREKS_IMAGES := \
+#    secureks.b00 secureks.b01 secureks.b02 secureks.b03 secureks.b04 \
+#    secureks.b05 secureks.b06 secureks.mdt
 
-SECUREKS_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(SECUREKS_IMAGES)))
-$(SECUREKS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "SECUREKS firmware link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+#SECUREKS_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(SECUREKS_IMAGES)))
+#$(SECUREKS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+#	@echo "SECUREKS firmware link: $@"
+#	@mkdir -p $(dir $@)
+#	@rm -rf $@
+#	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
-ALL_DEFAULT_INSTALLED_MODULES += $(SECUREKS_SYMLINKS)
+#ALL_DEFAULT_INSTALLED_MODULES += $(SECUREKS_SYMLINKS)
 # END SECUREKS Images
 
 # WIDEVINE Images
 WIDEVINE_IMAGES := \
     widevine.b00 widevine.b01 widevine.b02 widevine.b03 widevine.b04 \
-    widevine.b05 widevine.b06 widevine.mdt
+    widevine.b05 widevine.b06 widevine.b07 widevine.mdt
 
 WIDEVINE_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(WIDEVINE_IMAGES)))
 $(WIDEVINE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
