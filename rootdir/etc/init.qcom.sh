@@ -95,6 +95,14 @@ start_msm_irqbalance()
 	fi
 }
 
+start_copying_prebuilt_qcril_db()
+{
+    if [ -f /system/vendor/qcril.db -a ! -f /data/misc/radio/qcril.db ]; then
+        cp /system/vendor/qcril.db /data/misc/radio/qcril.db
+        chown -h radio.radio /data/misc/radio/qcril.db
+    fi
+}
+
 baseband=`getprop ro.baseband`
 echo 1 > /proc/sys/net/ipv6/conf/default/accept_ra_defrtr
 
@@ -160,6 +168,39 @@ case "$target" in
         esac
         start_charger_monitor
         ;;
+    "sdm660")
+        if [ -f /sys/devices/soc0/soc_id ]; then
+            soc_id=`cat /sys/devices/soc0/soc_id`
+        else
+            soc_id=`cat /sys/devices/system/soc/soc0/id`
+        fi
+
+        if [ -f /sys/devices/soc0/hw_platform ]; then
+             hw_platform=`cat /sys/devices/soc0/hw_platform`
+        else
+             hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
+        fi
+
+        case "$soc_id" in
+             "317" | "324" | "325" | "326" | "318" | "327" )
+                  case "$hw_platform" in
+                       "Surf")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "MTP")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "RCM")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "QRD")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                  esac
+                  ;;
+       esac
+        start_msm_irqbalance
+        ;;
     "apq8084")
         platformvalue=`cat /sys/devices/soc0/hw_platform`
         case "$platformvalue" in
@@ -211,7 +252,7 @@ case "$target" in
                   ;;
         esac
         ;;
-    "msm8994" | "msm8992" | "msmcobalt")
+    "msm8994" | "msm8992" | "msm8998" | "msmskunk" | "sdmbat")
         start_msm_irqbalance
         ;;
     "msm8996")
@@ -252,7 +293,7 @@ case "$target" in
              hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
         fi
         case "$soc_id" in
-             "294" | "295" | "303" | "307" | "308" | "309" | "313")
+             "294" | "295" | "303" | "307" | "308" | "309" | "313" | "320")
                   case "$hw_platform" in
                        "Surf")
                                     setprop qemu.hw.mainkeys 0
@@ -281,7 +322,7 @@ case "$target" in
              hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
         fi
         case "$soc_id" in
-             "293" | "304" )
+             "293" | "304" | "338" )
                   case "$hw_platform" in
                        "Surf")
                                     setprop qemu.hw.mainkeys 0
@@ -296,18 +337,44 @@ case "$target" in
                   ;;
        esac
         ;;
-esac
+    esac
 
-bootmode=`getprop ro.bootmode`
-emmc_boot=`getprop ro.boot.emmc`
-case "$emmc_boot"
-    in "true")
-        if [ "$bootmode" != "charger" ]; then # start rmt_storage and rfs_access
-            start rmt_storage
-            start rfs_access
-        fi
-    ;;
-esac
+#
+# Copy qcril.db if needed for RIL
+#
+start_copying_prebuilt_qcril_db
+echo 1 > /data/misc/radio/db_check_done
+
+#
+# Make modem config folder and copy firmware config to that folder for RIL
+#
+if [ -f /data/misc/radio/ver_info.txt ]; then
+    prev_version_info=`cat /data/misc/radio/ver_info.txt`
+else
+    prev_version_info=""
+fi
+
+cur_version_info=`cat /firmware/verinfo/ver_info.txt`
+if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
+    rm -rf /data/misc/radio/modem_config
+    mkdir /data/misc/radio/modem_config
+    chmod 770 /data/misc/radio/modem_config
+    cp -r /firmware/image/modem_pr/mcfg/configs/* /data/misc/radio/modem_config
+    chown -hR radio.radio /data/misc/radio/modem_config
+    cp /firmware/verinfo/ver_info.txt /data/misc/radio/ver_info.txt
+    chown radio.radio /data/misc/radio/ver_info.txt
+fi
+cp /firmware/image/modem_pr/mbn_ota.txt /data/misc/radio/modem_config
+chown radio.radio /data/misc/radio/modem_config/mbn_ota.txt
+echo 1 > /data/misc/radio/copy_complete
+
+#Power_BSP
+battery_present=`cat /sys/class/power_supply/battery/present`
+factory_boot=`cat /sys/class/lge_power/lge_cable_detect/is_factory_cable_boot`
+if [ $battery_present -eq 0 ] && [ $factory_boot -eq 1 ]; then
+    echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    echo "powersave" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+fi
 
 #check build variant for printk logging
 #current default minimum boot-time-default
@@ -315,10 +382,14 @@ buildvariant=`getprop ro.build.type`
 case "$buildvariant" in
     "userdebug" | "eng")
         #set default loglevel to KERN_INFO
-        echo "6 6 1 7" > /proc/sys/kernel/printk
+        #echo "6 6 1 7" > /proc/sys/kernel/printk
+        #LGE change log level
+        echo "7 6 1 7" > /proc/sys/kernel/printk
         ;;
     *)
         #set default loglevel to KERN_WARNING
-        echo "4 4 1 4" > /proc/sys/kernel/printk
+        #echo "4 4 1 4" > /proc/sys/kernel/printk
+        #LGE change log level
+        echo "7 6 1 7" > /proc/sys/kernel/printk
         ;;
 esac
