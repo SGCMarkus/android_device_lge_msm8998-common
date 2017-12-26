@@ -26,10 +26,10 @@
 #
 
 # TODO: This MUST be blocked not use in LGE device configuration.
-#import init.qcom.usb.rc
+import init.qcom.usb.rc
 #import init.msm.usb.configfs.rc
 import init.target.rc
-import init.qcom.factory.rc
+#import init.qcom.factory.rc
 #import init.qcom.test.rc
 
 on early-init
