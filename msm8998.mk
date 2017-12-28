@@ -126,14 +126,56 @@ PRODUCT_PACKAGES += \
     services-ext
 
 # Device init scripts
-PRODUCT_PACKAGES += \
-    fstab.qcom \
-    init.qcom.rc \
-    init.qcom.sh \
-    init.qcom.sensors.sh \
-    init.qcom.usb.rc \
-    init.target.rc \
-    ueventd.qcom.rc
+#PRODUCT_PACKAGES += \
+#    fstab.qcom \
+#    init.qcom.rc \
+#    init.qcom.sh \
+#    init.qcom.sensors.sh \
+#    init.qcom.usb.rc \
+#    init.target.rc \
+#    ueventd.qcom.rc
+
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/rootdir/etc/fstab.joan:root/fstab.joan \
+     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:root/fstab.qcom \
+     $(LOCAL_PATH)/rootdir/etc/init.class_main.sh:root/init.class_main.sh \
+     $(LOCAL_PATH)/rootdir/etc/init.joan.power.rc:root/init.joan.power.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.joan.rc:root/init.joan.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.joan_core.rc:root/init.joan_core.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.joan_product.rc:root/init.joan_product.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.laop.rc:root/init.laop.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.msm8998.crash.sh:root/init.msm8998.crash.sh \
+     $(LOCAL_PATH)/rootdir/etc/init.msm8998_core.rc:root/init.msm8998_core.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+     $(LOCAL_PATH)/rootdir/etc/init.qcom.rc:root/init.qcom.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.qcom.sensors.sh:root/init.qcom.sensors.sh \
+     $(LOCAL_PATH)/rootdir/etc/init.qcom.sh:root/init.qcom.sh \
+     $(LOCAL_PATH)/rootdir/etc/init.target.rc:root/init.target.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.usb.configfs.rc:root/init.usb.configfs.rc \
+     $(LOCAL_PATH)/rootdir/etc/loggy.sh:root/loggy.sh \
+     $(LOCAL_PATH)/rootdir/etc/set_emmc_size.sh:root/set_emmc_size.sh \
+     $(LOCAL_PATH)/rootdir/etc/ueventd.joan.rc:root/ueventd.joan.rc \
+     $(LOCAL_PATH)/rootdir/etc/ueventd.rc:root/ueventd.rc \
+     $(LOCAL_PATH)/rootdir/etc/init.time_in_state.sh:root/init.time_in_state.sh
+
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.atd.rc:root/init.lge.atd.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.audio.rc:root/init.lge.audio.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.bt.rc:root/init.lge.bt.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.early.rc:root/init.lge.early.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.fingerprints.rc:root/init.lge.fingerprints.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.fm.rc:root/init.lge.fm.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.fs.rc:root/init.lge.fs.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.ima.rc:root/init.lge.ima.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.log.rc:root/init.lge.log.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.modem_log.rc:root/init.lge.modem_log.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.power.rc:root/init.lge.power.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.rc:root/init.lge.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.sensors.rc:root/init.lge.sensors.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.svelte.rc:root/init.lge.svelte.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.usb.configfs.rc:root/init.lge.usb.configfs.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.usb.rc:root/init.lge.usb.rc \
+     $(LOCAL_PATH)/rootdir/lge/init.lge.usb.sh:root/init.lge.usb.sh
 
 # Display
 PRODUCT_PACKAGES += \
@@ -306,3 +348,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+
+# ADB crap
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.secure=0 \
+    ro.adb.secure=0
