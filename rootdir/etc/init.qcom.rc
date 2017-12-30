@@ -41,8 +41,8 @@ on init
 #    mkdir /persist 0771 root system
 
 #    # Support legacy paths
-#    symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0
+#   # symlink /sdcard /mnt/sdcard
+    # symlink /sdcard /storage/sdcard0
 
     # Create cgroup mount point for memory
     mount tmpfs none /sys/fs/cgroup mode=0750,uid=0,gid=1000
@@ -385,10 +385,11 @@ service perfd /system/vendor/bin/perfd
 #    disabled
 #    socket iop seqpacket 0666 root system
 
-service qcomsysd /system/bin/qcom-system-daemon
-    class main
-    user root
-    group root qcom_diag
+# TODO: This MUST be disabled not use 'qcom system daemon' in LGE platform.
+#service qcomsysd /system/bin/qcom-system-daemon
+#    class main
+#    user root
+#    group root qcom_diag
 
 service ssr_setup /system/bin/ssr_setup
     oneshot
@@ -546,11 +547,12 @@ service config_bt_addr /system/bin/btnvtool -O
     group bluetooth radio
     oneshot
 
-service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
-    class core
-    user root
-    seclabel u:r:bluetooth_loader:s0
-    oneshot
+# TODO: This MUST be added in LGE platform(It's for Qualcomm solution).
+#service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
+#    class core
+#    user root
+#    seclabel u:r:bluetooth_loader:s0
+#    oneshot
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start

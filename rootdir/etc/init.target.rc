@@ -39,24 +39,25 @@ on init
     write /dev/stune/foreground/schedtune.colocate 0
     write /dev/stune/top-app/schedtune.colocate 1
 
-on fs
-    wait /dev/block/platform/soc/1da4000.ufshc
-    symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
-    mount_all fstab.qcom
-    swapon_all fstab.qcom
+# TODO: This MUST be changed to mount device in LGE platform.
+#on fs
+#    wait /dev/block/platform/soc/1da4000.ufshc
+#    symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
+#    mount_all fstab.qcom
+#    swapon_all fstab.qcom
 
     # Keeping following partitions outside fstab file. As user may not have
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
 
-    wait /dev/block/bootdevice/by-name/persist
-    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
-    mkdir /persist/data 0700 system system
-    mkdir /persist/bms 0700 root system
-    restorecon_recursive /persist
+#    wait /dev/block/bootdevice/by-name/persist
+#    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
+#    mkdir /persist/data 0700 system system
+#    mkdir /persist/bms 0700 root system
+#    restorecon_recursive /persist
 
-    mount ext4 /dev/block/bootdevice/by-name/dsp /dsp ro nosuid nodev barrier=1
-    mount ext4 /dev/block/bootdevice/by-name/dsp_a /dsp ro nosuid nodev barrier=1
+#    mount ext4 /dev/block/bootdevice/by-name/dsp /dsp ro nosuid nodev barrier=1
+#    mount ext4 /dev/block/bootdevice/by-name/dsp_a /dsp ro nosuid nodev barrier=1
 
 on post-fs
     start qseecomd
@@ -290,11 +291,12 @@ service audiod /system/bin/audiod
 #
 #
 
-service imsqmidaemon /system/bin/imsqmidaemon
-    class main
-    user system
-    socket ims_qmid stream 0660 system radio
-    group radio log diag
+# TODO: This MUST be disabled not use 'qcom ims daemon' in LGE platform.
+#service imsqmidaemon /system/bin/imsqmidaemon
+#    class main
+#    user system
+#    socket ims_qmid stream 0660 system radio
+#    group radio log diag
 
 #service imsdatadaemon /system/bin/imsdatadaemon
 #    class main
@@ -360,25 +362,28 @@ service pd_mapper /system/vendor/bin/pd-mapper
 #   group gps system qcom_diag diag log inet net_raw
 #   disabled
 
-on property:sys.ims.QMI_DAEMON_STATUS=1
-    start imsdatadaemon
+# TODO: This MUST be disabled not use 'adsprpcd' in LGE platform.
+#on property:sys.ims.QMI_DAEMON_STATUS=1
+#    start imsdatadaemon
 
-service ims_rtp_daemon /system/bin/ims_rtp_daemon
-   class main
-   user system
-   socket ims_rtpd stream 0660 system radio
-   group radio diag inet log
-   disabled
+# TODO: This MUST be disabled not use 'ims_rtp_daemon' in LGE platform.
+#service ims_rtp_daemon /system/bin/ims_rtp_daemon
+#   class main
+#   user system
+#   socket ims_rtpd stream 0660 system radio
+#   group radio diag inet log
+#   disabled
 
-service imscmservice /system/bin/imscmservice
-   class main
-   user system
-   group radio diag log
-   disabled
+# TODO: This MUST be disabled not use 'imscmservice' in LGE platform.
+#service imscmservice /system/bin/imscmservice
+#   class main
+#   user system
+#   group radio diag log
+#   disabled
 
-on property:sys.ims.DATA_DAEMON_STATUS=1
-    start ims_rtp_daemon
-    start imscmservice
+#on property:sys.ims.DATA_DAEMON_STATUS=1
+#    start ims_rtp_daemon
+#    start imscmservice
 
 service ppd /system/vendor/bin/mm-pp-dpps
     class late_start
@@ -424,11 +429,12 @@ on property:init.svc.zygote=restarting
 #    user system
 #    group system
 
-service seempd /system/bin/seempd
-    class late_start
-    user system
-    group system
-    socket seempdw dgram 0666 system system
+# TODO: This MUST be disabled not use 'seempd' in LGE platform.
+#service seempd /system/bin/seempd
+#    class late_start
+#    user system
+#    group system
+#    socket seempdw dgram 0666 system system
 
 service energy-awareness /system/bin/energy-awareness
     class main
@@ -461,7 +467,8 @@ service qvrd /system/vendor/bin/qvrservice
 #    user system
 #    group camera system inet
 
-service qdmastatsd /system/bin/qdmastatsd
-    class late_start
-    user system
-    group system
+#  Disabled  'qdma' in LGE platform
+#service qdmastatsd /system/bin/qdmastatsd
+#    class late_start
+#    user system
+#    group system
