@@ -1166,6 +1166,19 @@ service time_daemon /system/bin/time_daemon
     user root
     group root
 
+# ramoops backup function service
+service ramoops_backup /system/bin/sh /ramoops_backup.sh
+    class main
+    user root
+    oneshot
+
+# time_in_state
+service time_in_state /system/bin/sh /init.time_in_state.sh
+    class main
+    user root
+    oneshot
+
+# time_in_state
 service loggy /system/bin/sh  /loggy.sh
     class main
     user root
