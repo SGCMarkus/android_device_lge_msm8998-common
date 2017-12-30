@@ -157,7 +157,8 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/rootdir/etc/set_emmc_size.sh:root/set_emmc_size.sh \
      $(LOCAL_PATH)/rootdir/etc/ueventd.joan.rc:root/ueventd.joan.rc \
      $(LOCAL_PATH)/rootdir/etc/ueventd.rc:root/ueventd.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.time_in_state.sh:root/init.time_in_state.sh
+     $(LOCAL_PATH)/rootdir/etc/init.time_in_state.sh:root/init.time_in_state.sh \
+     $(LOCAL_PATH)/rootdir/etc/ramoops_backup.sh:root/ramoops_backup.sh
 
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/rootdir/lge/init.lge.atd.rc:root/init.lge.atd.rc \
