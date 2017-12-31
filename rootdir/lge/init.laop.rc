@@ -1,4 +1,0 @@
-#LAOP
-on post-fs
-    mkdir /persist-lg/laop 0771 system radio
-    mkdir /persist-lg/laop/property 0771 system radio
