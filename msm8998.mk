@@ -164,14 +164,15 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/rootdir/root/init.qcom.power.rc:root/init.qcom.power.rc \
      $(LOCAL_PATH)/rootdir/root/init.class_main.sh:root/init.class_main.sh \
      $(LOCAL_PATH)/rootdir/root/init.qcom.rc:root/init.qcom.rc \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.fs.rc:root/init.qcom.fs.rc \
      $(LOCAL_PATH)/rootdir/root/init.msm8998.crash.sh:root/init.msm8998.crash.sh \
      $(LOCAL_PATH)/rootdir/root/init.msm8998_core.rc:root/init.msm8998_core.rc \
      $(LOCAL_PATH)/rootdir/root/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
-     $(LOCAL_PATH)/rootdir/root/init.qcom.rc:root/init.qcom.rc \
      $(LOCAL_PATH)/rootdir/root/init.qcom.sensors.sh:root/init.qcom.sensors.sh \
      $(LOCAL_PATH)/rootdir/root/init.qcom.sh:root/init.qcom.sh \
      $(LOCAL_PATH)/rootdir/root/init.target.rc:root/init.target.rc \
      $(LOCAL_PATH)/rootdir/root/init.qcom.usb.configfs.rc:root/init.qcom.usb.configfs.rc \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.usb.rc:root/init.qcom.usb.rc \
      $(LOCAL_PATH)/rootdir/root/loggy.sh:root/loggy.sh \
      $(LOCAL_PATH)/rootdir/root/set_emmc_size.sh:root/set_emmc_size.sh \
      $(LOCAL_PATH)/rootdir/root/ueventd.qcom.rc:root/ueventd.qcom.rc \
