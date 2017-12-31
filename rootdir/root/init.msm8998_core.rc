@@ -1,0 +1,620 @@
+# This file is imported by init.{ro.hardware}.rc
+
+# to override this file (device specific .rc)
+# joan_product init rc
+
+on init
+    exec u:r:setup_fs:s0 -- /sbin/setup_fs_static \
+         /dev/block/bootdevice/by-name/OP \
+         no_reboot
+
+on fs
+    mkdir /OP 0771 system system
+    exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/OP
+    mount ext4 /dev/block/bootdevice/by-name/OP /OP rw nosuid nodev barrier=1 noauto_da_alloc
+    restorecon_recursive /OP
+    mount ext4 /dev/block/bootdevice/by-name/OP /OP ro remount nosuid nodev barrier=1 noauto_da_alloc
+
+on post-fs-data
+    # NFC: create data/nfc for nv storage
+    mkdir /data/nfc 0770 nfc nfc
+    mkdir /data/nfc/param 0770 nfc nfc
+
+# Begin Immersion Changes
+    mkdir /dev/pipes 0771 system system
+    export VIBE_PIPE_PATH /dev/pipes
+# End Immersion Changes
+
+
+# LGE IMS ipsec solution [START]
+service ipsecclient /system/bin/ipsecclient
+    class main
+    group system net_admin net_raw
+    disabled
+
+service ipsecstarter /system/bin/ipsecstarter
+    class main
+    user system
+    group system net_admin net_raw
+# LGE IMS ipsec solution [END]
+
+# LGE IMS Features - To interwork with QMI WMS (64-bit exe/lib)
+service imswmsproxy /system/bin/imswmsproxy
+    class main
+    user system
+    group radio system net_admin net_raw
+# LGE IMS Features with QMI WMS (64-bit exe/lib)[END]
+
+#[S]Broadcast Service
+on post-fs-data
+    mkdir /data/cas 0770 system media
+
+service broadcast /system/bin/libbroadcast_server
+    class main
+    user media
+    group system audio media graphics sdcard_rw net_raw
+    socket dmb_socket stream 0660 media media
+
+on property:init.svc.media=restarting
+    restart broadcast
+#[E]Broadcast Service
+
+# Begin Immersion Changes
+service immvibed /system/bin/immvibed -p 99 -u 1000
+    class core
+    user root
+    group root
+    oneshot
+# End Immersion Changes
+
+#
+# initialize and configure zram/swap including some tweaks related.
+#
+# service zramswapon /system/bin/logwrapper /system/bin/sh /system/etc/init.lge.zramswap.sh start
+service zramswapon /system/bin/sh /system/etc/init.lge.zramswap.sh start
+	user root
+	group system
+	disabled
+	oneshot
+
+#user root
+#group system
+#disabled
+#oneshot
+
+#
+# deinit the zram/swap
+#
+service zramswapoff /system/bin/logwrapper /system/bin/sh /system/etc/init.lge.zramswap.sh stop
+	user root
+	group system
+	disabled
+	oneshot
+
+#user root
+#group system
+#disabled
+#oneshot
+
+#
+# The below is not only the project "Svelte", but also LGE's feature-added svelte.
+#
+on property:ro.boot.ksm=1
+	# Configure and enable KSM
+	write /sys/kernel/mm/ksm/pages_to_scan 100
+	write /sys/kernel/mm/ksm/sleep_millisecs 500
+	write /sys/kernel/mm/ksm/run 1
+
+#on property:sys.boot_completed=1
+on boot
+	# initialize zram/swap
+	start zramswapon
+
+# Sensor, onhand daemon
+service onhand /system/bin/onhandd
+    class late_start
+    user system
+    group system
+    disabled
+
+on property:persist.sensors.onhand.en=1
+    start onhand
+
+on property:persist.sensors.onhand.en=0
+    stop onhand
+
+on post-fs-data
+    mkdir /sns/cal/ 0755 system system
+
+
+# Start Wi-Fi Service
+import /init.wifi.rc
+
+# Start Wi-Fi Service for Helium
+import /init.wifi_ext.rc
+
+# fingerprints
+on post-fs-data
+#make factory test result directory
+   mkdir /sns/fingerprint 0775 system system
+   mkdir /data/fpc 0755 system system
+   restorecon /data/fpc
+   mkdir /data/fpc_images 0755 system system
+   restorecon /data/fpc_images
+
+#change cucialtec device permission
+on boot
+   chown system input /sys/devices/virtual/input/lge_fingerprint/testmode
+   chown system input /sys/devices/virtual/input/lge_fingerprint/spitest
+   chown system input /sys/devices/virtual/input/lge_fingerprint/zonetest
+   chown system input /sys/devices/virtual/input/lge_fingerprint/checkerbdtest
+   chown system input /sys/devices/virtual/input/lge_fingerprint/rubbertest
+   chown system input /sys/devices/virtual/input/lge_fingerprint/intstatus
+   chown system input /sys/devices/virtual/input/lge_fingerprint/qup_id
+   chown system input /sys/devices/virtual/input/lge_fingerprint/waitfinger
+   chown system input /sys/devices/virtual/input/lge_fingerprint/spi_prepare
+
+   chmod 0660 /sys/devices/virtual/input/lge_fingerprint/testmode
+   chmod 0660 /sys/devices/virtual/input/lge_fingerprint/spitest
+   chmod 0660 /sys/devices/virtual/input/lge_fingerprint/zonetest
+   chmod 0660 /sys/devices/virtual/input/lge_fingerprint/checkerbdtest
+   chmod 0660 /sys/devices/virtual/input/lge_fingerprint/rubbertest
+   chmod 0440 /sys/devices/virtual/input/lge_fingerprint/intstatus
+   chmod 0660 /sys/devices/virtual/input/lge_fingerprint/qup_id
+   chmod 0220 /sys/devices/virtual/input/lge_fingerprint/waitfinger
+   chmod 0660 /sys/devices/virtual/input/lge_fingerprint/spi_prepare
+# FPC device permission
+
+   chown system input /sys/devices/virtual/input/lge_fingerprint/bus_lock
+   chown system input /sys/devices/virtual/input/lge_fingerprint/clk_enable
+   chown system input /sys/devices/virtual/input/lge_fingerprint/fabric_vote
+   chown system input /sys/devices/virtual/input/lge_fingerprint/hw_reset
+   chown system input /sys/devices/virtual/input/lge_fingerprint/irq
+   chown system input /sys/devices/virtual/input/lge_fingerprint/pinctl_set
+   chown system input /sys/devices/virtual/input/lge_fingerprint/spi_prepare
+   chown system input /sys/devices/virtual/input/lge_fingerprint/spi_owner
+   chown system input /sys/devices/virtual/input/lge_fingerprint/regulator_enable
+   chown system input /sys/devices/virtual/input/lge_fingerprint/wakeup_enable
+
+#oneshot service that loads fpc tz app in early phase.
+service fpc_early_loader /system/bin/fpc_early_loader
+    class late_start
+    user system
+    group system
+    oneshot
+
+#FIDO
+service fidod /system/bin/fidod
+    class late_start
+    user system
+    group system
+
+#fingerprint service
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system
+
+#QSEE_DUMP SERVICE THIS MUST BE REMOVED IN FINAL SW
+#service tz_dump /system/bin/sh /system/etc/tz_dump.sh
+#    class main
+#    user root
+#    group root
+#    oneshot
+#    seclabel u:r:log_services:s0
+
+#on post-fs-data
+#    start tz_dump
+
+#on property:persist.service.main.enable=6
+#    restart tz_dump
+#on property:persist.service.main.enable=5
+#    restart tz_dump
+#on property:persist.service.main.enable=4
+#    restart tz_dump
+#on property:persist.service.main.enable=3
+#    restart tz_dump
+#on property:persist.service.main.enable=2
+#    restart tz_dump
+#on property:persist.service.main.enable=1
+#    restart tz_dump
+#on property:persist.service.main.enable=0
+#    stop tz_dump
+
+on early-boot
+	exec /system/bin/sh /display_port_permission.sh
+
+on boot
+
+#for Dynamic Resolution Switching
+  chmod 644 /sys/class/graphics/fb0/mode
+  chmod 644 /sys/class/graphics/fb0/modes
+  chmod 644 /sys/class/graphics/fb0/freeze_state
+  chown system graphics /sys/class/graphics/fb0/mode
+  chown system graphics /sys/class/graphics/fb0/modes
+  chown system graphics /sys/class/graphics/fb0/freeze_state
+#end for Dynamic Resolution Switching
+
+#for Display Control Mode
+  chown system system /sys/class/panel/img_tune/boost_status
+  chown system system /sys/class/panel/img_tune/daylight_mode
+  chown system system /sys/class/panel/img_tune/screen_mode
+  chown system system /sys/class/panel/img_tune/video_enhancement
+  chown system system /sys/class/panel/img_tune/color_manager_status
+  chmod 644 /sys/class/panel/img_tune/rgb_tune
+  chown system system /sys/class/panel/img_tune/rgb_tune
+#end for Display Control Mode
+
+#for Display Control Mode
+  chown system system /sys/class/graphics/fb0/msm_fb_persist_mode
+#end Display Control Mode
+#for High Luminance Mode
+  chown system system /sys/devices/virtual/graphics/fb0/hl_mode
+#end for High Luminance Mode
+
+#for Comfort View
+  chmod 644 /sys/class/panel/img_tune/comfort_view
+  chown system system /sys/class/panel/img_tune/comfort_view
+#end for Comfort View
+
+#for Ambient current state
+  chmod 644 /sys/class/graphics/fb0/cur_panel_mode
+  chown system system /sys/class/graphics/fb0/cur_panel_mode
+#end for Ambient current state
+
+#for AOD Area
+  chmod 644 /sys/class/panel/aod/area
+  chown system system /sys/class/panel/aod/area
+#end for AOD Area
+
+#for Ambient Extension Brightness
+  chmod 644 /sys/class/leds/lcd-backlight-ex/brightness
+  chown system system /sys/class/leds/lcd-backlight-ex/brightness
+#end for Ambient Extension Brightness
+
+#for Reader Mode
+  chmod 644 /sys/class/graphics/fb0/reader_mode
+  chown system system /sys/class/graphics/fb0/reader_mode
+#end for Reader Mode
+
+#Sync fb0 nodes with init.qcom.early_boot.sh
+  chmod 644 /sys/class/graphics/fb0/idle_time
+  chown system graphics /sys/class/graphics/fb0/idle_time
+  chmod 644 /sys/class/graphics/fb0/dynamic_fps
+  chown system graphics /sys/class/graphics/fb0/dynamic_fps
+  chmod 644 /sys/class/graphics/fb0/dyn_pu
+  chown system graphics /sys/class/graphics/fb0/dyn_pu
+  chmod 644 /sys/class/graphics/fb0/msm_cmd_autorefresh_en
+  chown system graphics /sys/class/graphics/fb0/msm_cmd_autorefresh_en
+#end Sync fb0 nodes with init.qcom.early_boot.sh
+
+# START touch_driver
+	chown system system /sys/devices/virtual/input/lge_touch/incoming_call
+	chmod 664 /sys/devices/virtual/input/lge_touch/incoming_call
+	chown system system /sys/devices/virtual/input/lge_touch/ime_status
+	chown system lgkeyguard /sys/devices/virtual/input/lge_touch/keyguard
+	chmod 664 /sys/devices/virtual/input/lge_touch/keyguard
+	chown system system /sys/devices/virtual/input/lge_touch/debug_tool
+	chmod 664 /sys/devices/virtual/input/lge_touch/debug_tool
+	chown system system /sys/devices/virtual/input/lge_touch/debug_option
+	chmod 664 /sys/devices/virtual/input/lge_touch/debug_option
+	chown system system /sys/devices/virtual/input/lge_touch/onhand
+	chmod 664 /sys/devices/virtual/input/lge_touch/onhand
+	chown system system /sys/devices/virtual/input/lge_touch/vr_status
+	chmod 664 /sys/devices/virtual/input/lge_touch/vr_status
+	chown system system /sys/devices/virtual/input/lge_touch/autotune
+	chmod 664 /sys/devices/virtual/input/lge_touch/autotune
+# END touch_driver
+
+# START touch_knock_on
+	chown system system /sys/devices/virtual/input/lge_touch/lpwg_data
+	chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_data
+	chown system system /sys/devices/virtual/input/lge_touch/lpwg_notify
+	chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_notify
+	chown system system /sys/devices/virtual/input/lge_touch/quick_cover_status
+	chmod 664 /sys/devices/virtual/input/lge_touch/quick_cover_status
+	chown system system /sys/devices/virtual/input/lge_touch/q_sensitivity
+	chmod 664 /sys/devices/virtual/input/lge_touch/q_sensitivity
+	chown system system /sys/devices/virtual/input/lge_touch/swipe_enable
+	chmod 664 /sys/devices/virtual/input/lge_touch/swipe_enable
+	chown system system /sys/devices/virtual/input/lge_touch/swipe_tool
+	chmod 664 /sys/devices/virtual/input/lge_touch/swipe_tool
+	chown system system /sys/devices/virtual/input/lge_touch/lpwg_abs
+	chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_abs
+# END touch_knock_on
+
+service dhcpcd_eth0 /system/bin/dhcpcd -aABDKL
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+
+on post-fs-data
+# change preload directory permission for movetosd about preload app
+    start chmod_dp
+on post-fs
+# Support tuxera exfat filesystem
+	insmod /system/lib/modules/texfat.ko
+
+# change preload directory permission for movetosd about preload app
+service chmod_dp /system/bin/sh /system/etc/change_permission_preload.sh
+    disabled
+    oneshot
+
+
+on early-fs
+	ffu_update
+
+# Touch_BSP, add call_state property, lockscreen property, vr_status property
+on property:ril.lge.touch.callstate=0
+	write /sys/devices/virtual/input/lge_touch/incoming_call 0
+on property:ril.lge.touch.callstate=1
+	write /sys/devices/virtual/input/lge_touch/incoming_call 1
+on property:ril.lge.touch.callstate=2
+	write /sys/devices/virtual/input/lge_touch/incoming_call 2
+on property:service.keyguard.status=0
+	write /sys/devices/virtual/input/lge_touch/keyguard 0
+on property:service.keyguard.status=1
+	write /sys/devices/virtual/input/lge_touch/keyguard 1
+on property:service.keyguard.status=2
+	write /sys/devices/virtual/input/lge_touch/keyguard 1
+on property:vrcore.mode.on=false
+	write /sys/devices/virtual/input/lge_touch/vr_status 0
+on property:vrcore.mode.on=true
+	write /sys/devices/virtual/input/lge_touch/vr_status 1
+
+# Bluetooth Split A2DP property
+setprop persist.bt.a2dp_offload_cap sbc-aptx-aptxhd-aac
+# Begin Immersion changes
+# Touchsense Player service
+    service immvibed /system/bin/immvibed -p 99 -u 1000
+    class core
+    user root
+    group root
+    ioprio rt 4
+# end Immersion changes
+
+on property:persist.sys.emmc_size=32G
+    setprop ro.device.memory.system 0
+    setprop ro.device.memory.internal 32
+
+on property:persist.sys.emmc_size=64G
+    setprop ro.device.memory.system 0
+    setprop ro.device.memory.internal 64
+
+on property:persist.sys.emmc_size=128G
+    setprop ro.device.memory.system 0
+    setprop ro.device.memory.internal 128
+
+service set_emmc_size /system/bin/sh /set_emmc_size.sh
+    class main
+    user root
+    group media_rw system sdcard_rw
+    oneshot
+
+# START SD Card Encryption
+on init
+    setprop ro.ssbd.session /dev/block/bootdevice/by-name/eksst
+    export SDCARD_TRAY_PATH /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/cd_status
+
+# SUPPORT SRTC PARTITION
+on init
+    mkdir /srtc 0755 system system
+    wait /dev/block/bootdevice/by-name/srtc
+    exec u:r:setup_fs:s0 -- /sbin/setup_fs_static \
+        /dev/block/bootdevice/by-name/srtc \
+        no_reboot
+
+    mkdir /qni 0755 system system
+	wait /dev/block/bootdevice/by-name/qni
+	exec u:r:setup_fs:s0 -- /sbin/setup_fs_static \
+		/dev/block/bootdevice/by-name/qni \
+		no_reboot
+
+on fs
+    wait /dev/block/bootdevice/by-name/srtc
+    exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/srtc
+    mount ext4 /dev/block/bootdevice/by-name/srtc /srtc nosuid nodev barrier=1 noatime noauto_da_alloc errors=continue
+
+    wait /dev/block/bootdevice/by-name/qni
+    exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/qni
+    mount ext4 /dev/block/bootdevice/by-name/qni /qni nosuid nodev barrier=1 noatime noauto_da_alloc errors=continue
+
+on post-fs-data
+    chown system system /srtc
+    chmod 0775 /srtc
+on init
+    write /sys/module/firmware_class/parameters/path /system/etc/firmware
+
+on late-init
+    setprop ro.support.waterproof true
+
+# LGE Bluetooth rc
+on boot
+
+# Feature chip vendor : qct
+setprop bluetooth.chip.vendor qcom
+
+# Enable AVRCP Browsing
+setprop persist.service.avrcp.browsing 1
+setprop persist.service.avrcp.browsing2 1
+
+# Load bdaddr from ftm_item when BT on
+service bdaddr_loader /system/bin/bdaddr_loader
+    class late_start
+    user root
+    group bluetooth net_bt_admin
+    oneshot
+
+service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
+    class core
+    user root
+    oneshot
+
+# LGE FM Radio rc
+service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
+    class late_start
+    user root
+    group system
+    disabled
+    oneshot
+
+on boot
+    setprop ro.fm.module QCT
+
+# LGE ATD service rc
+service atd /system/bin/atd
+    socket atd stream 0660 system system
+    class main
+
+service frstd /system/bin/frstd
+    class main
+
+on property:frstd.ctrl.run=yes
+    restart frstd
+on property:frstd.ctrl.run=no
+    stop frstd
+
+# create dir for logsave
+on post-fs-data
+    mkdir /data/factory 0775 system system
+on init
+    mkdir /mpt 0755 system system
+    mkdir /firmware 0771 system system
+    mkdir /bt_firmware 0771 system system
+    mkdir /dsp 0771 media media
+
+    wait /dev/block/bootdevice/by-name/mpt
+    exec u:r:setup_fs:s0 -- /sbin/setup_fs_static \
+        /dev/block/bootdevice/by-name/mpt \
+        no_reboot
+
+on fs
+    mount_all fstab.${ro.hardware}
+    swapon_all fstab.${ro.hardware}
+
+    wait /dev/block/bootdevice/by-name/persist
+    exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/persist
+    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1 noatime noauto_da_alloc errors=continue
+    restorecon_recursive /persist
+    mkdir /persist/data 0700 system system
+
+    wait /dev/block/bootdevice/by-name/modem
+    mount vfat /dev/block/bootdevice/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
+
+    wait /dev/block/bootdevice/by-name/sns
+    exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/sns
+    mount ext4 /dev/block/bootdevice/by-name/sns /sns nosuid nodev barrier=1 noatime noauto_da_alloc errors=continue
+
+    wait /dev/block/bootdevice/by-name/drm
+    exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/drm
+    mount ext4 /dev/block/bootdevice/by-name/drm /persist-lg nosuid nodev barrier=1 noatime noauto_da_alloc errors=continue
+
+    wait /dev/block/bootdevice/by-name/mpt
+    exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/mpt
+    mount ext4 /dev/block/bootdevice/by-name/mpt /mpt nosuid nodev barrier=1 noatime noauto_da_alloc errors=continue
+
+    # Executing tune2fs to reserve some region in /data.(40MB)
+    exec /system/bin/tune2fs -u system -r 10240 /dev/block/bootdevice/by-name/userdata
+
+on post-fs
+# LGE_CHANGE_START
+    # execute sreadahead daemon to reduce boot-time
+    start sreadahead
+# LGE_CHANGE_END
+
+on post-fs-data
+    chown system system /mpt
+    chmod 0775 /mpt
+    mkdir /data/ramoops 0750 root log
+
+    start mbn_mount
+
+on property:persist.radio.mcfg.version=true
+    start mbn_mnt_ssr
+
+on property:persist.radio.mcfg.version=false
+    start mbn_umount
+
+service mbn_mount /system/vendor/bin/mbn_mount.sh
+    user root
+    oneshot
+
+service mbn_umount /system/vendor/bin/mbn_umount.sh
+    user root
+    oneshot
+
+service mbn_mnt_ssr /system/vendor/bin/mbn_mnt_and_ssr.sh
+    user root
+    oneshot
+
+# LGE ramoops backup function service
+service ramoops_backup /system/bin/sh /system/etc/ramoops_backup.sh
+    class main
+    disabled
+    oneshot
+
+# LGE pstore backup function service
+service pstore_backup /system/bin/sh /system/etc/pstore_backup.sh
+    class main
+    disabled
+    oneshot
+
+# enable & disable crash handler, rtb & trace event through property
+service service-crash /system/bin/sh /init.msm8998.crash.sh
+    class main
+    disabled
+    oneshot
+
+on property:persist.service.crash.enable=1
+    restart service-crash
+
+on property:persist.service.crash.enable=0
+    restart service-crash
+
+service time_in_state /system/bin/sh /init.time_in_state.sh
+    class main
+    disabled
+    oneshot
+
+on property:init.svc.bootanim=stopped
+    start time_in_state
+    start ramoops_backup
+    start pstore_backup
+
+#LGE_CHANGE_S, Advanced MOCA, huny.lee@lge.com
+service moca_service /system/bin/advanced_moca -s
+    class late_start
+    user root
+    group system sdcard_r sdcard_rw radio
+    disabled
+    oneshot
+    socket Full.MOCA.port stream 660 system system
+
+on property:persist.service.moca.enable=1
+    start moca_service
+
+on property:persist.service.moca.enable=0
+    stop moca_service
+#LGE_CHANGE_E, Advanced MOCA, huny.lee@lge.com
+
+# LGE_CHANGE_START, execute sreadahead daemon to reduce boot-time
+service sreadahead /sbin/treadahead
+    oneshot
+    disabled
+    seclabel u:r:sreadahead:s0
+
+# make a diecision whether sreadahead would be performed or not.
+service sreadahead-check /sbin/sreadahead_check
+    class main
+    user root
+    group root
+    oneshot
+    seclabel u:r:sreadahead-check:s0
+# LGE_CHANGE_END
+

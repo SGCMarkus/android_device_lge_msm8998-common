@@ -136,28 +136,48 @@ PRODUCT_PACKAGES += \
 #    init.target.rc \
 #    ueventd.qcom.rc
 
+#PRODUCT_COPY_FILES += \
+#     $(LOCAL_PATH)/rootdir/etc/fstab.joan:root/fstab.joan \
+#     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:root/fstab.qcom \
+#     $(LOCAL_PATH)/rootdir/etc/init.class_main.sh:root/init.class_main.sh \
+#     $(LOCAL_PATH)/rootdir/etc/init.joan.power.rc:root/init.joan.power.rc \
+#     $(LOCAL_PATH)/rootdir/etc/init.joan.rc:root/init.joan.rc \
+#     $(LOCAL_PATH)/rootdir/etc/init.joan_core.rc:root/init.joan_core.rc \
+#     $(LOCAL_PATH)/rootdir/etc/init.joan_product.rc:root/init.joan_product.rc \
+#     $(LOCAL_PATH)/rootdir/etc/init.msm8998.crash.sh:root/init.msm8998.crash.sh \
+#     $(LOCAL_PATH)/rootdir/etc/init.msm8998_core.rc:root/init.msm8998_core.rc \
+#     $(LOCAL_PATH)/rootdir/etc/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+#     $(LOCAL_PATH)/rootdir/etc/init.qcom.rc:root/init.qcom.rc \
+#     $(LOCAL_PATH)/rootdir/etc/init.qcom.sensors.sh:root/init.qcom.sensors.sh \
+#     $(LOCAL_PATH)/rootdir/etc/init.qcom.sh:root/init.qcom.sh \
+#     $(LOCAL_PATH)/rootdir/etc/init.target.rc:root/init.target.rc \
+#     $(LOCAL_PATH)/rootdir/etc/init.usb.configfs.rc:root/init.usb.configfs.rc \
+#     $(LOCAL_PATH)/rootdir/etc/loggy.sh:root/loggy.sh \
+#     $(LOCAL_PATH)/rootdir/etc/set_emmc_size.sh:root/set_emmc_size.sh \
+#     $(LOCAL_PATH)/rootdir/etc/ueventd.joan.rc:root/ueventd.joan.rc \
+#     $(LOCAL_PATH)/rootdir/etc/ueventd.rc:root/ueventd.rc \
+#     $(LOCAL_PATH)/rootdir/etc/init.time_in_state.sh:root/init.time_in_state.sh \
+#     $(LOCAL_PATH)/rootdir/etc/ramoops_backup.sh:root/ramoops_backup.sh
+
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/rootdir/etc/fstab.joan:root/fstab.joan \
-     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:root/fstab.qcom \
-     $(LOCAL_PATH)/rootdir/etc/init.class_main.sh:root/init.class_main.sh \
-     $(LOCAL_PATH)/rootdir/etc/init.joan.power.rc:root/init.joan.power.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.joan.rc:root/init.joan.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.joan_core.rc:root/init.joan_core.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.joan_product.rc:root/init.joan_product.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.msm8998.crash.sh:root/init.msm8998.crash.sh \
-     $(LOCAL_PATH)/rootdir/etc/init.msm8998_core.rc:root/init.msm8998_core.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
-     $(LOCAL_PATH)/rootdir/etc/init.qcom.rc:root/init.qcom.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.qcom.sensors.sh:root/init.qcom.sensors.sh \
-     $(LOCAL_PATH)/rootdir/etc/init.qcom.sh:root/init.qcom.sh \
-     $(LOCAL_PATH)/rootdir/etc/init.target.rc:root/init.target.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.usb.configfs.rc:root/init.usb.configfs.rc \
-     $(LOCAL_PATH)/rootdir/etc/loggy.sh:root/loggy.sh \
-     $(LOCAL_PATH)/rootdir/etc/set_emmc_size.sh:root/set_emmc_size.sh \
-     $(LOCAL_PATH)/rootdir/etc/ueventd.joan.rc:root/ueventd.joan.rc \
-     $(LOCAL_PATH)/rootdir/etc/ueventd.rc:root/ueventd.rc \
-     $(LOCAL_PATH)/rootdir/etc/init.time_in_state.sh:root/init.time_in_state.sh \
-     $(LOCAL_PATH)/rootdir/etc/ramoops_backup.sh:root/ramoops_backup.sh
+     $(LOCAL_PATH)/rootdir/root/fstab.qcom:root/fstab.qcom \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.power.rc:root/init.qcom.power.rc \
+     $(LOCAL_PATH)/rootdir/root/init.class_main.sh:root/init.class_main.sh \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.rc:root/init.qcom.rc \
+     $(LOCAL_PATH)/rootdir/root/init.msm8998.crash.sh:root/init.msm8998.crash.sh \
+     $(LOCAL_PATH)/rootdir/root/init.msm8998_core.rc:root/init.msm8998_core.rc \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.rc:root/init.qcom.rc \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.sensors.sh:root/init.qcom.sensors.sh \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.sh:root/init.qcom.sh \
+     $(LOCAL_PATH)/rootdir/root/init.target.rc:root/init.target.rc \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.usb.configfs.rc:root/init.qcom.usb.configfs.rc \
+     $(LOCAL_PATH)/rootdir/root/loggy.sh:root/loggy.sh \
+     $(LOCAL_PATH)/rootdir/root/set_emmc_size.sh:root/set_emmc_size.sh \
+     $(LOCAL_PATH)/rootdir/root/ueventd.qcom.rc:root/ueventd.qcom.rc \
+     $(LOCAL_PATH)/rootdir/root/ueventd.rc:root/ueventd.rc \
+     $(LOCAL_PATH)/rootdir/root/init.time_in_state.sh:root/init.time_in_state.sh \
+     $(LOCAL_PATH)/rootdir/root/ramoops_backup.sh:root/ramoops_backup.sh
 
 #PRODUCT_COPY_FILES += \
 #     $(LOCAL_PATH)/rootdir/lge/init.lge.atd.rc:root/init.lge.atd.rc \
