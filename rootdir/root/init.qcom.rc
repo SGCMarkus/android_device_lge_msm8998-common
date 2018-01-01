@@ -25,7 +25,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-# TODO: This MUST be blocked not use in LGE device configuration.
 import init.target.rc
 #import init.qcom.factory.rc
 #import init.qcom.test.rc
@@ -39,8 +38,8 @@ on init
 #    mkdir /persist 0771 root system
 
 #    # Support legacy paths
-#   # symlink /sdcard /mnt/sdcard
-    # symlink /sdcard /storage/sdcard0
+#   symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 
     # Create cgroup mount point for memory
     mount tmpfs none /sys/fs/cgroup mode=0750,uid=0,gid=1000
@@ -384,10 +383,10 @@ service perfd /system/vendor/bin/perfd
 #    socket iop seqpacket 0666 root system
 
 # TODO: This MUST be disabled not use 'qcom system daemon' in LGE platform.
-#service qcomsysd /system/bin/qcom-system-daemon
-#    class main
-#    user root
-#    group root qcom_diag
+service qcomsysd /system/bin/qcom-system-daemon
+    class main
+    user root
+    group root qcom_diag
 
 service ssr_setup /system/bin/ssr_setup
     oneshot
@@ -1092,13 +1091,13 @@ on property:sys.wfdservice=enable
 on property:sys.wfdservice=disable
     stop wfdservice
 
-service RIDL /system/vendor/bin/RIDLClient.exe
-    class late_start
-    oneshot
-    user system
-    group system inet log sdcard_r sdcard_rw qcom_diag
-    # removed for security team - misc bluetooth radio gps wifi diag media_rw
-    # limited to 12 groups.  Unused: audio usb net_bt_admin net_bt_stac net_raw net_admin
+#service RIDL /system/vendor/bin/RIDLClient.exe
+#    class late_start
+#    oneshot
+#    user system
+#    group system inet log sdcard_r sdcard_rw qcom_diag
+#    # removed for security team - misc bluetooth radio gps wifi diag media_rw
+#    # limited to 12 groups.  Unused: audio usb net_bt_admin net_bt_stac net_raw net_admin
 
 # service for USERDEBUG
 service LKCore-dbg /system/vendor/bin/LKCore
