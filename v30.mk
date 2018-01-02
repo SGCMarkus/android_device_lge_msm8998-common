@@ -16,7 +16,7 @@
 #
 
 # Inherit proprietary blobs
-$(call inherit-product-if-exists, vendor/lge/msm8998-common/msm8998-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/v30-common/v30-common-vendor.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -29,6 +29,10 @@ PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 $(call inherit-product, frameworks/native/build/phone-xxxhdpi-4096-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-4096-hwui-memory.mk)
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 2880
+TARGET_SCREEN_WIDTH := 1440
 
 # Add WiFi Config files
 # TEMP: These are broken right now
@@ -107,6 +111,13 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:/system/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml
+
+# Audio
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/mixer_paths_tavil.xml:system/etc/mixer_paths_tavil.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sensors/sensor_def_joan.conf:system/etc/sensors/sensor_def_common.conf
 
 # Bluetooth
 PRODUCT_PACKAGES += \

@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-COMMON_PATH := device/lge/msm8998-common
+COMMON_PATH := device/lge/v30-common
 
 # inherit from common lge
 -include device/lge/common/BoardConfigCommon.mk
@@ -313,4 +313,4 @@ WIFI_DRIVER_MODULE_NAME := "wlan"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # inherit from the proprietary version
--include vendor/lge/msm8998-common/BoardConfigVendor.mk
+-include vendor/lge/v30-common/BoardConfigVendor.mk
