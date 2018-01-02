@@ -207,7 +207,8 @@ PRODUCT_PACKAGES += \
     hdmi_cec.msm8998 \
     hwcomposer.msm8998 \
     memtrack.msm8998 \
-    liboverlay
+    liboverlay \
+    qdcm_calib_data_SW43402_cmd_mode_dsc_dsi_panel.xml
 
 # Doze mode
 PRODUCT_PACKAGES += \
