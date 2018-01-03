@@ -30,6 +30,15 @@ $(call inherit-product, frameworks/native/build/phone-xxxhdpi-4096-dalvik-heap.m
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-4096-hwui-memory.mk)
 
+# Dalvik
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapgrowthlimit=256m \
+    dalvik.vm.heapstartsize=8m \
+    dalvik.vm.heapsize=512m \
+    dalvik.vm.heaptargetutilization=0.25 \
+    dalvik.vm.heapminfree=4m \
+    dalvik.vm.heapmaxfree=16m
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2880
 TARGET_SCREEN_WIDTH := 1440
@@ -189,7 +198,13 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/rootdir/root/ueventd.qcom.rc:root/ueventd.qcom.rc \
      $(LOCAL_PATH)/rootdir/root/ueventd.rc:root/ueventd.rc \
      $(LOCAL_PATH)/rootdir/root/init.time_in_state.sh:root/init.time_in_state.sh \
-     $(LOCAL_PATH)/rootdir/root/ramoops_backup.sh:root/ramoops_backup.sh
+     $(LOCAL_PATH)/rootdir/root/ramoops_backup.sh:root/ramoops_backup.sh \
+     $(LOCAL_PATH)/rootdir/bin/init.qti.qseecomd.sh:root/init.qti.qseecomd.sh \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.post_boot.sh:root/init.qcom.post_boot.sh
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/init.lge.zramswap.sh:system/etc/init.lge.zramswap.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
 
 #PRODUCT_COPY_FILES += \
 #     $(LOCAL_PATH)/rootdir/lge/init.lge.atd.rc:root/init.lge.atd.rc \
