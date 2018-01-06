@@ -68,7 +68,7 @@ ro.qcom.hdr.config=/system/etc/hdr_tm_config.xml
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
 # Fluence
-ro.qc.sdk.audio.fluencetype=nxp
+ro.qc.sdk.audio.fluencetype=none
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
 persist.audio.fluence.speaker=true

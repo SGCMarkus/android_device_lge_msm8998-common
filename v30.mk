@@ -204,7 +204,8 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/rootdir/root/init.time_in_state.sh:root/init.time_in_state.sh \
      $(LOCAL_PATH)/rootdir/root/ramoops_backup.sh:root/ramoops_backup.sh \
      $(LOCAL_PATH)/rootdir/bin/init.qti.qseecomd.sh:root/init.qti.qseecomd.sh \
-     $(LOCAL_PATH)/rootdir/root/init.qcom.post_boot.sh:root/init.qcom.post_boot.sh
+     $(LOCAL_PATH)/rootdir/root/init.qcom.post_boot.sh:root/init.qcom.post_boot.sh \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.usb.sh:root/init.qcom.usb.sh
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.lge.zramswap.sh:system/etc/init.lge.zramswap.sh \
