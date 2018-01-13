@@ -386,8 +386,8 @@ PRODUCT_PACKAGES += \
     libxml2
 
 # USB
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+#PRODUCT_PACKAGES += \
+#    com.android.future.usb.accessory
 
 # Virtual Reality
 PRODUCT_PACKAGES += \
