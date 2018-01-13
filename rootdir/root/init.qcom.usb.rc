@@ -54,18 +54,18 @@ on boot && property:sys.usb.configfs=0
     write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
 
-service lge-usb-sh /system/bin/sh /init.qcom.usb.sh
+service qcom-usb-sh /system/bin/sh /init.qcom.usb.sh
     class core
     user root
     oneshot
-    seclabel u:r:lge-usb-sh:s0
+    seclabel u:r:qcom-usb-sh:s0
 
-service lge-usb-def-sh /system/bin/sh /init.lge.usb.default.sh
+service qcom-usb-def-sh /system/bin/sh /init.lge.usb.default.sh
     class core
     user root
     oneshot
     disabled
-    seclabel u:r:lge-usb-def-sh:s0
+    seclabel u:r:qcom-usb-def-sh:s0
 
 service usbdebug-manager /sbin/usbdebug-manager
     class late_start
