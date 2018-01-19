@@ -26,7 +26,7 @@ include $(CLEAR_VARS)
 # CPPF Images
 CPPF_IMAGES := \
     cppf.b00 cppf.b01 cppf.b02 cppf.b03 cppf.b04 \
-    cppf.b05 cppf.b06 cppf.mdt
+    cppf.b05 cppf.b06 cppf.b07 cppf.mdt
 
 CPPF_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(CPPF_IMAGES)))
 $(CPPF_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -41,7 +41,7 @@ ALL_DEFAULT_INSTALLED_MODULES += $(CPPF_SYMLINKS)
 # DXHDCP2 Images
 DXHDCP2_IMAGES := \
     dxhdcp2.b00 dxhdcp2.b01 dxhdcp2.b02 dxhdcp2.b03 dxhdcp2.b04 \
-    dxhdcp2.b05 dxhdcp2.b06 dxhdcp2.mdt
+    dxhdcp2.b05 dxhdcp2.b06 dxhdcp.b07 dxhdcp2.mdt
 
 DXHDCP2_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(DXHDCP2_IMAGES)))
 $(DXHDCP2_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -53,35 +53,19 @@ $(DXHDCP2_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 ALL_DEFAULT_INSTALLED_MODULES += $(DXHDCP2_SYMLINKS)
 # END DXHDCP2 Images
 
-# HASHSTORE Images
-#HASHSTORE_IMAGES := \
-#    hashstor.b00 hashstor.b01 hashstor.b02 hashstor.b03 hashstor.b04 \
-#    hashstor.b05 hashstor.b06 hashstor.mdt
+# IPA_FWS Images
+IPA_FWS_IMAGES := \
+    ipa_fws.b00 ipa_fws.b01 ipa_fws.b02 ipa_fws.b03 ipa_fws.b04 ipa_fws.b05 ipa_fws.mdt
 
-#HASHSTORE_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(HASHSTORE_IMAGES)))
-#$(HASHSTORE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-#	@echo "HASHSTORE firmware link: $@"
-#	@mkdir -p $(dir $@)
-#	@rm -rf $@
-#	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+IPA_FWS_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(IPA_FWS_IMAGES)))
+$(IPA_FWS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "IPA_FWS firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
-#ALL_DEFAULT_INSTALLED_MODULES += $(HASHSTORE_SYMLINKS)
-# END HASHSTORE Images
-
-# SECUREKS Images
-#SECUREKS_IMAGES := \
-#    secureks.b00 secureks.b01 secureks.b02 secureks.b03 secureks.b04 \
-#    secureks.b05 secureks.b06 secureks.mdt
-
-#SECUREKS_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(SECUREKS_IMAGES)))
-#$(SECUREKS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-#	@echo "SECUREKS firmware link: $@"
-#	@mkdir -p $(dir $@)
-#	@rm -rf $@
-#	$(hide) ln -sf /firmware/image/$(notdir $@) $@
-
-#ALL_DEFAULT_INSTALLED_MODULES += $(SECUREKS_SYMLINKS)
-# END SECUREKS Images
+ALL_DEFAULT_INSTALLED_MODULES += $(IPA_FWS_SYMLINKS)
+# END IPA_FWS Images
 
 # WIDEVINE Images
 WIDEVINE_IMAGES := \
@@ -144,5 +128,30 @@ $(WCD_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /data/misc/audio/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WCD_SYMLINKS)
+
+
+QCA_CLD_IMAGES := \
+    bdwlan.bin bdwlan_ch0.bin bdwlan_ch1.bin
+
+QCA_CLD_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/wlan/qca_cld/,$(notdir $(QCA_CLD_IMAGES)))
+$(QCA_CLD_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "QCA_CLD firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /system/etc/wifi/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(QCA_CLD_SYMLINKS)
+
+QCA_CLD_IMAGES := \
+    wlan_mac.bin
+
+QCA_CLD_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/wlan/qca_cld/,$(notdir $(QCA_CLD_IMAGES)))
+$(QCA_CLD_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "QCA_CLD firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /data/misc/wifi/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(QCA_CLD_SYMLINKS)
 
 endif
