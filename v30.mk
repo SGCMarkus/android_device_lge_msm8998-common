@@ -103,34 +103,59 @@ PRODUCT_PACKAGES += \
     libvolumelistener \
     tinymix
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
-    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:/system/etc/audio_policy_configuration.xml \
-    $(LOCAL_PATH)/audio/listen_platform_info.xml:system/etc/listen_platform_info.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths_wcd9340.xml:system/etc/sound_trigger_mixer_paths_wcd9340.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
-    $(LOCAL_PATH)/audio/mirrorlink_audio_policy_configuration.xml:system/etc/mirrorlink_audio_policy_configuration.xml
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+#    $(LOCAL_PATH)/audio/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
+#    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+#    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
+#    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:/system/etc/audio_policy_configuration.xml \
+#    $(LOCAL_PATH)/audio/listen_platform_info.xml:system/etc/listen_platform_info.xml \
+#    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths_wcd9340.xml:system/etc/sound_trigger_mixer_paths_wcd9340.xml \
+#    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
+#    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
+#    $(LOCAL_PATH)/audio/mirrorlink_audio_policy_configuration.xml:system/etc/mirrorlink_audio_policy_configuration.xml
+
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/audio/audio_policy_volumes.xml:/system/etc/audio_policy_volumes.xml \
+#    $(LOCAL_PATH)/audio/audio_policy_volumes_amp_drc.xml:/system/etc/audio_policy_volumes_amp_drc.xml \
+#    $(LOCAL_PATH)/audio/default_volume_tables.xml:/system/etc/default_volume_tables.xml
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_policy_volumes.xml:/system/etc/audio_policy_volumes.xml \
-    $(LOCAL_PATH)/audio/audio_policy_volumes_amp_drc.xml:/system/etc/audio_policy_volumes_amp_drc.xml \
-    $(LOCAL_PATH)/audio/default_volume_tables.xml:/system/etc/default_volume_tables.xml
+    device/lge/v30-common/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
+    device/lge/v30-common/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    device/lge/v30-common/audio/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
+    device/lge/v30-common/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
+    device/lge/v30-common/audio/listen_platform_info.xml:system/etc/listen_platform_info.xml \
+    device/lge/v30-common/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    device/lge/v30-common/audio/mixer_paths_dtp.xml:system/etc/mixer_paths_dtp.xml \
+    device/lge/v30-common/audio/mixer_paths_i2s.xml:system/etc/mixer_paths_i2s.xml \
+    device/lge/v30-common/audio/mixer_paths_qvr.xml:system/etc/mixer_paths_qvr.xml \
+    device/lge/v30-common/audio/mixer_paths_skuk.xml:system/etc/mixer_paths_skuk.xml \
+    device/lge/v30-common/audio/mixer_paths_tasha.xml:system/etc/mixer_paths_tasha.xml \
+    device/lge/v30-common/audio/mixer_paths_tasha_mic.xml:system/etc/mixer_paths_tasha_mic.xml \
+    device/lge/v30-common/audio/mixer_paths_tavil.xml:system/etc/mixer_paths_tavil.xml \
+    device/lge/v30-common/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
+    device/lge/v30-common/audio/sound_trigger_mixer_paths_wcd9330.xml:system/etc/sound_trigger_mixer_paths_wcd9330.xml \
+    device/lge/v30-common/audio/sound_trigger_mixer_paths_wcd9340.xml:system/etc/sound_trigger_mixer_paths_wcd9340.xml \
+    device/lge/v30-common/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml
+
+#PRODUCT_COPY_FILES += \
+#    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:/system/etc/a2dp_audio_policy_configuration.xml \
+#    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
+#    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:/system/etc/a2dp_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:/system/etc/audio_policy_volumes.xml \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:/system/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml
 
-# Audio
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/mixer_paths_tavil.xml:system/etc/mixer_paths_tavil.xml
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sensors/sensor_def_joan.conf:system/etc/sensors/sensor_def_common.conf
+# Audio
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/audio/mixer_paths_tavil.xml:system/etc/mixer_paths_tavil.xml
+
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -372,6 +397,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:system/etc/sensors/hals.conf \
+
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sensors/sensor_def_joan.conf:system/etc/sensors/sensor_def_common.conf
 
 # Thermal
 PRODUCT_COPY_FILES += \
