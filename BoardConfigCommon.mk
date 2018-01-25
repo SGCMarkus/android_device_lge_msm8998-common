@@ -203,9 +203,9 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 
 # CMHW
-BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
-BOARD_USES_CYANOGEN_HARDWARE := true
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap2wake"
+#BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
+#BOARD_USES_CYANOGEN_HARDWARE := true
+#TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap2wake"
 
 # CNE and DPM
 BOARD_USES_QCNE := true
@@ -254,7 +254,7 @@ TARGET_HW_DISK_ENCRYPTION := true
 
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8998
-BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
+#BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
 
@@ -278,7 +278,7 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 TARGET_USERIMAGES_USE_EXT4 := true
 
 # pdfium
-TARGET_NEEDS_PDFIUM_BIGINT := true
+#TARGET_NEEDS_PDFIUM_BIGINT := true
 
 # Power
 #TARGET_PROVIDES_POWERHAL := true
@@ -291,7 +291,7 @@ TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
 # Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QC_TIME_SERVICES := true
-PRODUCT_BOOT_JARS += tcmiface tcmclient com.qti.dpmframework dpmapi com.qti.location.sdk
+#PRODUCT_BOOT_JARS += tcmiface tcmclient com.qti.dpmframework dpmapi com.qti.location.sdk
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/root/fstab.qcom
