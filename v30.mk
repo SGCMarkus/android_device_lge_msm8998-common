@@ -230,7 +230,9 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/rootdir/root/ramoops_backup.sh:root/ramoops_backup.sh \
      $(LOCAL_PATH)/rootdir/bin/init.qti.qseecomd.sh:root/init.qti.qseecomd.sh \
      $(LOCAL_PATH)/rootdir/root/init.qcom.post_boot.sh:root/init.qcom.post_boot.sh \
-     $(LOCAL_PATH)/rootdir/root/init.qcom.usb.sh:root/init.qcom.usb.sh
+     $(LOCAL_PATH)/rootdir/root/init.qcom.usb.sh:root/init.qcom.usb.sh \
+     $(LOCAL_PATH)/rootdir/root/init.wifi.rc:root/init.wifi.rc \
+     $(LOCAL_PATH)/rootdir/root/init.wifi_ext.rc:root/init.wifi_ext.rc \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.lge.zramswap.sh:system/etc/init.lge.zramswap.sh \
