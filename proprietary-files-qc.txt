@@ -1,3 +1,5 @@
+# ADSP
+
 bin/adsprpcd
 vendor/lib/libadsp_default_listener.so
 vendor/lib/libadsp_hvx_callback_skel.so
@@ -6,21 +8,27 @@ vendor/lib/libadsprpc.so
 vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
 vendor/lib64/libadsp_default_listener.so
+vendor/lib64/libadsp_hvx_callback_skel.so
+vendor/lib64/libadsp_hvx_stub.so
 vendor/lib64/libadsprpc.so
 vendor/lib64/libfastcvadsp_stub.so
 vendor/lib64/libfastcvopt.so
+
+# ADSP Modules
+
 vendor/lib/rfsa/adsp/capi_v2_aptX_Classic.so
 vendor/lib/rfsa/adsp/capi_v2_aptX_HD.so
-vendor/lib/rfsa/adsp/libFastRPC_UTF_Forward_Qtc2_skel.so
-vendor/lib/rfsa/adsp/libFastRPC_UTF_Forward_skel.so
+vendor/lib/rfsa/adsp/fluence_voiceplus_module.so.1
 vendor/lib/rfsa/adsp/libadsp_fd_skel.so
 vendor/lib/rfsa/adsp/libadsp_hvx_add_constant.so
 vendor/lib/rfsa/adsp/libadsp_hvx_skel.so
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
 vendor/lib/rfsa/adsp/libdspCV_skel.so
 vendor/lib/rfsa/adsp/libedge_smooth_skel.so
-vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
+vendor/lib/rfsa/adsp/libfastcvadsp.so
+vendor/lib/rfsa/adsp/libFastRPC_UTF_Forward_Qtc2_skel.so
+vendor/lib/rfsa/adsp/libFastRPC_UTF_Forward_skel.so
 vendor/lib/rfsa/adsp/libobjectMattingApp_skel.so
 vendor/lib/rfsa/adsp/libqvr_adsp_driver_skel.so
 vendor/lib/rfsa/adsp/libscveBlobDescriptor_skel.so
@@ -33,10 +41,14 @@ vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 vendor/lib/rfsa/adsp/libscveVideoSummary_skel.so
 vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
+vendor/lib/rfsa/adsp/mmecns_module.so.1
+
+# Audio
+
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
+vendor/lib/libacdbmapper.so
 vendor/lib/libacdbrtac.so
-vendor/lib/libadiertac.so
 vendor/lib/libadm.so
 vendor/lib/libaudcal.so
 vendor/lib/soundfx/libqcbassboost.so
@@ -44,12 +56,16 @@ vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 vendor/lib64/libacdb-fts.so
 vendor/lib64/libacdbloader.so
+vendor/lib64/libacdbmapper.so
 vendor/lib64/libacdbrtac.so
-vendor/lib64/libadiertac.so
+vendor/lib64/libadm.so
 vendor/lib64/libaudcal.so
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
+
+# Bluetooth
+
 bin/btnvtool
 bin/hci_qcomm_init
 bin/wcnss_filter
@@ -65,6 +81,9 @@ etc/firmware/rampatch_tlv_3.2.tlv
 etc/firmware/rampatch_tlv.img
 vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
+
+# CNE
+
 bin/cnd
 etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
@@ -86,9 +105,11 @@ etc/cne/wqeclient/VZW/VZW_profile6.xml
 etc/permissions/cneapiclient.xml
 etc/permissions/com.quicinc.cne.xml
 etc/permissions/ConnectivityExt.xml
+
 framework/cneapiclient.jar
-framework/com.quicinc.cne.jar
+# framework/com.quicinc.cne.jar
 framework/ConnectivityExt.jar
+-priv-app/CNEService/CNEService.apk
 vendor/lib/libcne.so
 vendor/lib/libcneapiclient.so
 vendor/lib/libcneqmiutils.so
@@ -103,6 +124,9 @@ vendor/lib64/libvendorconn.so
 vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
+
+# DPM
+
 bin/dpmd
 etc/dpm/dpm.conf
 etc/dpm/nsrm/NsrmConfiguration.xml
@@ -111,6 +135,7 @@ etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
+-priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/lib/libdpmctmgr.so
 vendor/lib/libdpmfdmgr.so
 vendor/lib/libdpmframework.so
@@ -121,6 +146,9 @@ vendor/lib64/libdpmfdmgr.so
 vendor/lib64/libdpmframework.so
 vendor/lib64/libdpmnsrm.so
 vendor/lib64/libdpmtcm.so
+
+# DRM
+
 bin/qseecomd
 vendor/bin/qseeproxydaemon
 vendor/lib/libQSEEComAPI.so
@@ -134,24 +162,35 @@ vendor/lib64/libqisl.so
 vendor/lib64/libQSEEComAPI.so
 vendor/lib64/librpmb.so
 vendor/lib64/libsecureui_svcsock.so
+vendor/lib64/libsecureui.so
 vendor/lib64/libSecureUILib.so
 vendor/lib64/libssd.so
 vendor/lib64/libspl.so
 vendor/lib64/libStDrvInt.so
+
+# Gatekeeper
+
 vendor/lib/hw/gatekeeper.msm8998.so
 vendor/lib64/hw/gatekeeper.msm8998.so
+
+# GPS
+
 bin/loc_launcher
 bin/lowi-server
 bin/xtwifi-client
 bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
+etc/permissions/com.qualcomm.location.vzw_library.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
 etc/cacert_location.pem
 etc/xtra_root_cert.pem
 framework/com.qti.location.sdk.jar
+framework/com.qualcomm.location.vzw_library.jar
 framework/izat.xt.srv.jar
+-lib64/libloc_api_v02.so
 lib64/libloc_ds_api.so
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/bin/slim_daemon
 vendor/lib64/hw/flp.default.so
 vendor/lib64/libalarmservice_jni.so
@@ -176,6 +215,9 @@ vendor/lib64/libulp2.so
 vendor/lib64/libxt_native.so
 vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
+
+# Graphics
+
 vendor/lib/egl/eglSubDriverAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
@@ -202,6 +244,7 @@ vendor/lib/librs_adreno.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/libsd_sdk_display.so
 vendor/lib/libsdm-color.so
+-vendor/lib/libsdm-disp-apis.so
 vendor/lib64/egl/eglSubDriverAndroid.so
 vendor/lib64/egl/libEGL_adreno.so
 vendor/lib64/egl/libGLESv1_CM_adreno.so
@@ -229,11 +272,26 @@ vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libsd_sdk_display.so
 vendor/lib64/libsdm-color.so
 vendor/lib64/libsdm-diag.so
+-vendor/lib64/libsdm-disp-apis.so
 vendor/lib64/libsdmextension.so
+vendor/lib64/libuiblur.so
+etc/qdcm_calib_data_SW43402_cmd_mode_dsc_dsi_panel.xml
+
+# Keystore
+
 vendor/lib/hw/keystore.msm8998.so
 vendor/lib64/hw/keystore.msm8998.so
+
+# Listen
+
 vendor/lib/hw/sound_trigger.primary.msm8998.so
 vendor/lib/libsmwrapper.so
+vendor/lib64/hw/sound_trigger.primary.msm8998.so
+
+# Media
+
+-vendor/lib/libgpustats.so
+-vendor/lib64/libgpustats.so
 lib64/libOmxVpp.so
 lib64/libvpplibrary.so
 lib/libOmxVpp.so
@@ -256,18 +314,36 @@ vendor/lib/libOmxVideoDSMode.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libvpphvx.so
 vendor/lib/libvqzip.so
+
+# Network
+
+-priv-app/QtiTetherService/QtiTetherService.apk
 vendor/lib64/libconnctrl.so
 vendor/lib64/libQtiTether.so
+
+# Perf
+
 bin/energy-awareness
 bin/msm_irqbalance
+
+# Peripheral manager
+
 bin/pm-proxy
 bin/pm-service
 vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
+
+# Postprocessing
+
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 framework/com.qti.snapdragon.sdk.display.jar
+# -vendor/app/colorservice/colorservice.apk
 vendor/bin/mm-pp-dpps
+vendor/lib/libdisp-aba.so
 vendor/lib64/libdisp-aba.so
+
+# QMI
+
 bin/irsc_util
 etc/permissions/qti_permissions.xml
 vendor/bin/pd-mapper
@@ -303,15 +379,29 @@ vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmi.so
 vendor/lib64/libqmiservices.so
 vendor/lib64/libsmemlog.so
+
+# Radio
+
+# -app/datastatusnotification/datastatusnotification.apk
+# -app/embms/embms.apk
+# -app/QtiTelephonyService/QtiTelephonyService.apk
+-app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
 bin/radish
 bin/rmt_storage
 bin/tftp_server
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
+# etc/permissions/embms.xml
+# etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
+# etc/permissions/telephonyservice.xml
 framework/embmslibrary.jar
+# -framework/qcnvitems.jar
+-framework/qcrilhook.jar
+framework/qti-telephony-common.jar
 framework/QtiTelephonyServicelibrary.jar
+-priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/qti
 vendor/lib/libmdmdetect.so
 vendor/lib64/libconfigdb.so
@@ -329,6 +419,9 @@ vendor/lib64/librilqmiservices.so
 vendor/lib64/libsettings.so
 vendor/lib64/libsystem_health_mon.so
 vendor/qcril.db
+
+# Radio - IMS
+
 bin/ims_rtp_daemon
 bin/imscmservice
 bin/imsdatadaemon
@@ -337,6 +430,8 @@ etc/permissions/imscm.xml
 etc/permissions/qti-vzw-ims-internal.xml
 framework/imscmlibrary.jar
 framework/rcsimssettings.jar
+-vendor/app/ims/ims.apk
+-vendor/app/imssettings/imssettings.apk
 vendor/framework/qti-vzw-ims-internal.jar
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so
@@ -361,6 +456,9 @@ vendor/lib64/libimscamera_jni.so
 vendor/lib64/libimsmedia_jni.so
 vendor/lib64/librcc.so
 vendor/lib64/libvoice-svc.so
+
+# Sensors
+
 bin/sensors.qcom
 vendor/lib/hw/activity_recognition.msm8998.so
 vendor/lib/libsensor1.so
@@ -380,14 +478,37 @@ vendor/lib64/libsensor_user_cal.so
 vendor/lib64/libsensor1.so
 vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
+
+# Thermal
+
 etc/thermal-engine.conf
+etc/thermal-engine-default.conf
+etc/thermal-engine-msm8998.conf
 vendor/bin/thermal-engine
+-vendor/lib/libthermalclient.so
+-vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
+
+# Time services
+
+-app/TimeService/TimeService.apk
 bin/time_daemon
+-vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
+-vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
+
+# Voice fingerprint
+
 bin/qvop-daemon
 vendor/lib64/libqvop-service.so
 vendor/lib/libqvop-service.so
+
+# Widevine
+
 vendor/lib/mediadrm/libwvdrmengine.so
+
+# Wi-Fi
+
+bin/cnss_diag
 bin/cnss-daemon
