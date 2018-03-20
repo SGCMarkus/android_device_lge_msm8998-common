@@ -18,6 +18,9 @@
 
 set -e
 
+DEVICE=v30-common
+VENDOR=lge
+
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
@@ -39,35 +42,24 @@ while [ "$1" != "" ]; do
         -n | --no-cleanup )     CLEAN_VENDOR=false
                                 ;;
         -s | --section )        shift
-                                SECTION="$1"
+                                SECTION=$1
                                 CLEAN_VENDOR=false
                                 ;;
-        * )                     SRC="$1"
+        * )                     SRC=$1
                                 ;;
     esac
     shift
 done
 
 if [ -z "$SRC" ]; then
-    SRC=adb
+    SRC=/home/markus/superrs-kitchen/superr_v30_stock_nougat/
 fi
 
-# Initialize the helper for common platform
-setup_vendor "$PLATFORM_COMMON" "$VENDOR" "$CM_ROOT" true "$CLEAN_VENDOR"
+# Initialize the helper
+setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false "$CLEAN_VENDOR"
 
 extract "$MY_DIR"/proprietary-files-qc.txt "$SRC" "$SECTION"
 extract "$MY_DIR"/proprietary-files-qc-perf.txt "$SRC" "$SECTION"
 extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
-
-# Initialize the helper for common device
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true "$CLEAN_VENDOR"
-
-extract "$MY_DIR"/../$DEVICE_COMMON/proprietary-files.txt "$SRC" "$SECTION"
-
-# Reinitialize the helper for device
-setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false "$CLEAN_VENDOR"
-
-extract "$MY_DIR/../$DEVICE/proprietary-files-qc.txt" "$SRC" "$SECTION"
-extract "$MY_DIR/../$DEVICE/proprietary-files.txt" "$SRC" "$SECTION"
 
 "$MY_DIR"/setup-makefiles.sh
