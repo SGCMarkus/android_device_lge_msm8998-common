@@ -8,8 +8,8 @@ vendor/lib/libadsprpc.so
 vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
 vendor/lib64/libadsp_default_listener.so
-vendor/lib64/libadsp_hvx_callback_skel.so
-vendor/lib64/libadsp_hvx_stub.so
+#vendor/lib64/libadsp_hvx_callback_skel.so
+#vendor/lib64/libadsp_hvx_stub.so
 vendor/lib64/libadsprpc.so
 vendor/lib64/libfastcvadsp_stub.so
 vendor/lib64/libfastcvopt.so
@@ -58,7 +58,7 @@ vendor/lib64/libacdb-fts.so
 vendor/lib64/libacdbloader.so
 vendor/lib64/libacdbmapper.so
 vendor/lib64/libacdbrtac.so
-vendor/lib64/libadm.so
+# vendor/lib64/libadm.so
 vendor/lib64/libaudcal.so
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
@@ -162,7 +162,7 @@ vendor/lib64/libqisl.so
 vendor/lib64/libQSEEComAPI.so
 vendor/lib64/librpmb.so
 vendor/lib64/libsecureui_svcsock.so
-vendor/lib64/libsecureui.so
+#vendor/lib64/libsecureui.so
 vendor/lib64/libSecureUILib.so
 vendor/lib64/libssd.so
 vendor/lib64/libspl.so
@@ -180,13 +180,13 @@ bin/lowi-server
 bin/xtwifi-client
 bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
-etc/permissions/com.qualcomm.location.vzw_library.xml
+# etc/permissions/com.qualcomm.location.vzw_library.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
 etc/cacert_location.pem
 etc/xtra_root_cert.pem
 framework/com.qti.location.sdk.jar
-framework/com.qualcomm.location.vzw_library.jar
+# framework/com.qualcomm.location.vzw_library.jar
 framework/izat.xt.srv.jar
 -lib64/libloc_api_v02.so
 lib64/libloc_ds_api.so
@@ -274,7 +274,8 @@ vendor/lib64/libsdm-color.so
 vendor/lib64/libsdm-diag.so
 -vendor/lib64/libsdm-disp-apis.so
 vendor/lib64/libsdmextension.so
-vendor/lib64/libuiblur.so
+vendor/lib/libsdmextension.so
+#vendor/lib64/libuiblur.so
 etc/qdcm_calib_data_SW43402_cmd_mode_dsc_dsi_panel.xml
 
 # Keystore
@@ -430,8 +431,8 @@ etc/permissions/imscm.xml
 etc/permissions/qti-vzw-ims-internal.xml
 framework/imscmlibrary.jar
 framework/rcsimssettings.jar
--vendor/app/ims/ims.apk
--vendor/app/imssettings/imssettings.apk
+#-vendor/app/ims/ims.apk
+#-vendor/app/imssettings/imssettings.apk
 vendor/framework/qti-vzw-ims-internal.jar
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so
@@ -483,7 +484,7 @@ vendor/lib64/sensors.ssc.so
 
 etc/thermal-engine.conf
 etc/thermal-engine-default.conf
-etc/thermal-engine-msm8998.conf
+etc/thermal-engine-8998.conf
 vendor/bin/thermal-engine
 -vendor/lib/libthermalclient.so
 -vendor/lib64/libthermalclient.so
@@ -510,5 +511,5 @@ vendor/lib/mediadrm/libwvdrmengine.so
 
 # Wi-Fi
 
-bin/cnss_diag
+# bin/cnss_diag
 bin/cnss-daemon
