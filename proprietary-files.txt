@@ -434,6 +434,10 @@ bin/ipacm-diag
 
 vendor/firmware/libpn548ad_fw.so
 
+# Radio - factory
+
+lib64/libparam.so
+
 # Sensors
 
 etc/sensors/hals.conf

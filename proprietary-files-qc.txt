@@ -105,9 +105,8 @@ etc/cne/wqeclient/VZW/VZW_profile6.xml
 etc/permissions/cneapiclient.xml
 etc/permissions/com.quicinc.cne.xml
 etc/permissions/ConnectivityExt.xml
-
 framework/cneapiclient.jar
-# framework/com.quicinc.cne.jar
+framework/com.quicinc.cne.jar
 framework/ConnectivityExt.jar
 -priv-app/CNEService/CNEService.apk
 vendor/lib/libcne.so
@@ -180,13 +179,13 @@ bin/lowi-server
 bin/xtwifi-client
 bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
-# etc/permissions/com.qualcomm.location.vzw_library.xml
+etc/permissions/com.qualcomm.location.vzw_library.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
 etc/cacert_location.pem
 etc/xtra_root_cert.pem
 framework/com.qti.location.sdk.jar
-# framework/com.qualcomm.location.vzw_library.jar
+framework/com.qualcomm.location.vzw_library.jar
 framework/izat.xt.srv.jar
 -lib64/libloc_api_v02.so
 lib64/libloc_ds_api.so
@@ -383,9 +382,9 @@ vendor/lib64/libsmemlog.so
 
 # Radio
 
-# -app/datastatusnotification/datastatusnotification.apk
-# -app/embms/embms.apk
-# -app/QtiTelephonyService/QtiTelephonyService.apk
+-app/datastatusnotification/datastatusnotification.apk
+-app/embms/embms.apk
+-app/QtiTelephonyService/QtiTelephonyService.apk
 -app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
 bin/radish
@@ -393,12 +392,12 @@ bin/rmt_storage
 bin/tftp_server
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
-# etc/permissions/embms.xml
-# etc/permissions/qcnvitems.xml
+etc/permissions/embms.xml
+etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
-# etc/permissions/telephonyservice.xml
+etc/permissions/telephonyservice.xml
 framework/embmslibrary.jar
-# -framework/qcnvitems.jar
+-framework/qcnvitems.jar
 -framework/qcrilhook.jar
 framework/qti-telephony-common.jar
 framework/QtiTelephonyServicelibrary.jar
@@ -431,8 +430,8 @@ etc/permissions/imscm.xml
 etc/permissions/qti-vzw-ims-internal.xml
 framework/imscmlibrary.jar
 framework/rcsimssettings.jar
-#-vendor/app/ims/ims.apk
-#-vendor/app/imssettings/imssettings.apk
+-vendor/app/ims/ims.apk
+-vendor/app/imssettings/imssettings.apk
 vendor/framework/qti-vzw-ims-internal.jar
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so
