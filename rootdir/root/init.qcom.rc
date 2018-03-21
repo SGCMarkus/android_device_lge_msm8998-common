@@ -1178,9 +1178,9 @@ service time_in_state /system/bin/sh /init.time_in_state.sh
     oneshot
 
 # time_in_state
-#service loggy /system/bin/sh /loggy.sh
-#    class main
-#    user root
-#    oneshot
+service loggy /system/bin/sh /loggy.sh
+    class main
+    user root
+    oneshot
 
 import init.msm8998_core.rc
