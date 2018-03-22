@@ -3,9 +3,9 @@
 # to override this file (device specific .rc)
 # joan_product init rc
 
-import init.wifi.rc
+#import init.wifi.rc
 
-import init.wifi_ext.rc
+#import init.wifi_ext.rc
 
 on init
     exec u:r:setup_fs:s0 -- /sbin/setup_fs_static \

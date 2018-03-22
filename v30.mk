@@ -23,7 +23,7 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := 640dpi
+PRODUCT_AAPT_PREF_CONFIG := 560dpi
 PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
 #$(call inherit-product, frameworks/native/build/phone-xxxhdpi-4096-dalvik-heap.mk)
@@ -158,8 +158,8 @@ PRODUCT_COPY_FILES += \
 
 
 # Bluetooth
-PRODUCT_PACKAGES += \
-    hwaddrs
+#PRODUCT_PACKAGES += \
+#    hwaddrs
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -224,39 +224,26 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/rootdir/root/init.qcom.usb.rc:root/init.qcom.usb.rc \
      $(LOCAL_PATH)/rootdir/root/loggy.sh:root/loggy.sh \
      $(LOCAL_PATH)/rootdir/root/set_emmc_size.sh:root/set_emmc_size.sh \
+     $(LOCAL_PATH)/rootdir/root/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
      $(LOCAL_PATH)/rootdir/root/ueventd.qcom.rc:root/ueventd.qcom.rc \
      $(LOCAL_PATH)/rootdir/root/ueventd.rc:root/ueventd.rc \
      $(LOCAL_PATH)/rootdir/root/init.time_in_state.sh:root/init.time_in_state.sh \
      $(LOCAL_PATH)/rootdir/root/ramoops_backup.sh:root/ramoops_backup.sh \
-     $(LOCAL_PATH)/rootdir/bin/init.qti.qseecomd.sh:root/init.qti.qseecomd.sh \
      $(LOCAL_PATH)/rootdir/root/init.qcom.post_boot.sh:root/init.qcom.post_boot.sh \
      $(LOCAL_PATH)/rootdir/root/init.qcom.usb.sh:root/init.qcom.usb.sh \
      $(LOCAL_PATH)/rootdir/root/init.wifi.rc:root/init.wifi.rc \
      $(LOCAL_PATH)/rootdir/root/init.wifi_ext.rc:root/init.wifi_ext.rc \
+     $(LOCAL_PATH)/rootdir/bin/init.qti.qseecomd.sh:root/init.qti.qseecomd.sh \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.lge.zramswap.sh:system/etc/init.lge.zramswap.sh \
-    $(LOCAL_PATH)/rootdir/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
-
-#PRODUCT_COPY_FILES += \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.atd.rc:root/init.lge.atd.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.audio.rc:root/init.lge.audio.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.bt.rc:root/init.lge.bt.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.early.rc:root/init.lge.early.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.fingerprints.rc:root/init.lge.fingerprints.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.fm.rc:root/init.lge.fm.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.fs.rc:root/init.lge.fs.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.ima.rc:root/init.lge.ima.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.log.rc:root/init.lge.log.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.modem_log.rc:root/init.lge.modem_log.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.power.rc:root/init.lge.power.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.rc:root/init.lge.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.sensors.rc:root/init.lge.sensors.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.svelte.rc:root/init.lge.svelte.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.usb.configfs.rc:root/init.lge.usb.configfs.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.usb.rc:root/init.lge.usb.rc \
-#     $(LOCAL_PATH)/rootdir/lge/init.lge.usb.sh:root/init.lge.usb.sh \
-#     $(LOCAL_PATH)/rootdir/lge/init.laop.rc:root/init.laop.rc
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.radio.sh:system/etc/init.radio.sh \
 
 # Display
 PRODUCT_PACKAGES += \
