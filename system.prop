@@ -61,7 +61,7 @@ persist.data.mode=concurrent
 
 # Display
 ro.qualcomm.cabl=0
-ro.sf.lcd_density=640
+ro.sf.lcd_density=560
 ro.qcom.hdr.config=/system/etc/hdr_tm_config.xml
 
 # Factory Reset Protection (FRP)
@@ -165,6 +165,11 @@ net.tethering.noprovisioning=true
 
 # Time services
 persist.timed.enable=true
+
+# USB
+sys.usb.controller=a800000.dwc3
+sys.usb.rndis.func.name=gsi
+sys.usb.rmnet.func.name=gsi
 
 # WiFi
 wifi.interface=wlan0
